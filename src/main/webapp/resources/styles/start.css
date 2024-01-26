@@ -1,0 +1,47 @@
+/* styles/start.css */
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+h1 {
+    color: #333;
+}
+
+h2 {
+    color: #555;
+}
+
+#clock {
+    font-size: 24px;
+    color: #007bff;
+    margin-bottom: 20px;
+}
+
+.forward-button {
+    background-color: #28a745;
+    color: #fff;
+    padding: 10px 20px;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 5px;
+    margin-top: 20px;
+}
+
+.forward-button:hover {
+    background-color: #218838;
+}
+
+/* Optional: Add some spacing and center the content */
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+

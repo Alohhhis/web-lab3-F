@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+>
+
+<h:head>
+    <title>Основная страница</title>
+    <h:outputStylesheet name="styles/main.css"/>
+</h:head>
+
+<h:body onload="draw();">
+    <h1>Основная страница</h1>
+
+
+
+    <div class="button-container">
+        <h:button value="Назад" styleClass="return-button" outcome="go-to-start" id="go_to_start_button"/>
+    </div>
+
+    <div id="inputForm">
+
+                    <p:remoteCommand name="clickSender" action="#{result.addRowCanvas}" update=":resultTable"/>
+
+        <h:form id="valForm">
+            <div class="input_vlues">
+                <div id="x-container">
+                    <h:outputLabel for="x" value="Выберите X:">
+                    <p:spinner id="x" value="#{xBean.value}" min="-3" max="3" required="true"
+                               styleClass="r-input">
+                        <f:ajax execute="x" render=":msgPanel"/>
+                    </p:spinner>
+                    </h:outputLabel>
+                </div>
+
+
+                <div id="y-container">
+                    <h:outputLabel for="y" value="Выберите Y:">
+                        <h:inputText id="y" required="true" value="#{yBean.value}" maxlength="5"
+                                     styleClass="y-input" validator="#{yBean.validateY}">
+                            <f:ajax execute="y" render=":msgPanel"/>
+                            <f:validateDoubleRange minimum="-5" maximum="3"/>
+                            <p:watermark for="y" value="Введите значение [-5;3]"/>
+                        </h:inputText>
+                    </h:outputLabel>
+                </div>
+
+                <div id="r-container" class="r-input">
+                    <h:outputLabel for="r" value="Выберите R:">
+                    <p:spinner id="r" value="#{rBean.value}" min="0.1" max="3" required="true" stepFactor="0.1"
+                               onchange="drawShapesByR(this.value)">
+                        <p:ajax execute="@this"/>
+                    </p:spinner>
+                    </h:outputLabel>
+                </div>
+            </div>
+                <div id="table">
+                    <table>
+                        <tr>
+                            <td colspan="3">
+                                <canvas id="canvas" width="400" height="400"/>
+<!--                                <script type='text/javascript'>-->
+<!--                                    canvas.addEventListener("click", function (event){-->
+<!--                                        let x = event.offsetX;-->
+<!--                                        let y = event.offsetY;-->
+<!--                                        let r = document.getElementById("mainForm:beanRadius").value;-->
+<!--                                        let offset = document.getElementById("date").value;-->
+<!--                                        let rect = canvas.getBoundingClientRect();-->
+<!--                                        let clientX = (event.clientX - rect.left - 200) / (side / 3) * k;-->
+<!--                                        let clientY = ((-1) * (event.clientY - rect.top - 200)) / (side / 3) * k;-->
+<!--                                        colorizeDot(ctx, clientX, clientY, r);-->
+<!--                                        ctx.beginPath();-->
+<!--                                        ctx.arc(x,y,4,0,Math.PI*2);-->
+<!--                                        ctx.fill();-->
+<!--                                        ctx.stroke();-->
+<!--                                        ctx.closePath();-->
+
+<!--                                        console.log("Coordinate x: " + clientX + " ",-->
+<!--                                            "Coordinate y: "+ clientY + " r value = " + r);-->
+<!--                                        check(clientX, clientY);-->
+
+<!--                                        function colorizeDot(ctx,x, y, r){-->
+<!--                                            if (x >= 0 &amp;&amp; y >= 0){-->
+<!--                                                if (y &lt;= (-x + r/2)){-->
+<!--                                                    ctx.fillStyle="red";-->
+<!--                                                }-->
+<!--                                                else ctx.fillStyle="white";-->
+<!--                                            }-->
+<!--                                            else if (x > 0 &amp;&amp; y &lt; 0){-->
+<!--                                                if (Math.pow(x,2) + Math.pow(y,2) &lt;= Math.pow(r,2)){-->
+<!--                                                    ctx.fillStyle="red";-->
+<!--                                                }else ctx.fillStyle="white";-->
+<!--                                            }-->
+<!--                                            else if (x &lt; 0 &amp;&amp; y > 0){-->
+<!--                                                if ((y &lt;= (r / 2)) &amp;&amp; (x >= -r)){-->
+<!--                                                    ctx.fillStyle="red";-->
+<!--                                                }else ctx.fillStyle="white";-->
+<!--                                            }-->
+<!--                                            else ctx.fillStyle="white";-->
+<!--                                        }-->
+
+<!--                                        function check(clientX, clientY){-->
+<!--                                            document.getElementById("graphForm:hiddenX").value = clientX.toFixed(4);-->
+<!--                                            document.getElementById("graphForm:hiddenY").value = clientY.toFixed(4);-->
+<!--                                            document.getElementById("graphForm:hiddenR").value = document.getElementById("mainForm:beanRadius").value;-->
+<!--                                            document.getElementById("graphForm:hiddenOffset").value = offset;-->
+<!--                                            let btn = document.getElementById("graphForm:hidden-btn");-->
+<!--                                            btn.click();-->
+<!--                                        }-->
+<!--                                    })-->
+<!--                                </script>-->
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div>
+                <h:commandButton value="Отправить" id="send">
+                    <f:ajax execute="@form" render="resultTable" listener="#{result.addRow(xBean.value, yBean.value, rBean.value)}"/>
+                </h:commandButton>
+
+                <h:commandButton type="reset" value="Сбросить" onclick="resetForm()" styleClass="data-button"/>
+                <h:commandButton value="Очистить таблицу">
+                    <f:ajax render=":resultTable" listener="#{result.deleteResults}"/>
+                </h:commandButton>
+                </div>
+        </h:form>
+    </div>
+
+<!--    <h:form id="graphForm">-->
+<!--        <h:inputHidden id="hiddenX" value="#{xBean.value}"/>-->
+<!--        <h:inputHidden id="hiddenY" value="#{yBean.value}"/>-->
+<!--        <h:inputHidden id="hiddenR" value="#{rBean.value}"/>-->
+
+<!--        <h:commandButton style="display: none;" id="hidden-btn" action="#{result.addRow(xBean.value, yBean.value, rBean.value)}">-->
+<!--            <f:ajax execute="@form" render="resultTable"/>-->
+<!--        </h:commandButton>-->
+<!--    </h:form>-->
+    <p:remoteCommand name="clickSender" action="#{result.addRowCanvas}" update=":resultTable"/>
+    <div id="data" class="frame"
+         style="float:left; width: 100%; height: 550px;align-content: center; justify-content: center">
+        <div class="table-block">
+            <h:outputText value="Результаты" styleClass="table-caption"/>
+            <h:dataTable id="resultTable" cellspacing="6" cellpadding="15" styleClass="result-table" style="margin-left: 20px;"
+                         value="#{result.results}" var="point">
+                <p:remoteCommand name=""/>
+                <h:column>
+                    <f:facet name="header"> Координата X</f:facet>
+                    <h:outputText id="x1" value="#{point.x}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Координата Y</f:facet>
+                    <h:outputText id="y1" value="#{point.y}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Радиус R</f:facet>
+                    <h:outputText id="r1" value="#{point.r}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Факт попадания в область</f:facet>
+                    <h:outputText id="status" value="#{point.result}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Текущее время</f:facet>
+                    <h:outputText id="time" value="#{point.time}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Время работы (ms)</f:facet>
+                    <h:outputText id="script-time" value="#{point.scriptTime}"/>
+                </h:column>
+            </h:dataTable>
+        </div>
+    </div>
+    <div id="divOffset">
+        <h:inputHidden id="date"/>
+    </div>
+
+    <div>
+        <h:messages id="Yerrors" style="width: 100%; color: red; margin-top: 10px"/>
+        <h:messages id="Xerrors" style="width: 100%; color: red; margin-top: 10px"/>
+    </div>
+
+</h:body>
+
+<h:outputScript name="js/ErrorAndReset.js"/>
+<h:outputScript name="js/graphDrawer.js"/>
+
+</html>

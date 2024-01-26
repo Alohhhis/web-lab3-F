@@ -1,0 +1,127 @@
+/* styles/start.css */
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+h1 {
+    color: #333;
+}
+
+h2 {
+    color: #555;
+}
+
+#clock {
+    font-size: 24px;
+    color: #007bff;
+    margin-bottom: 20px;
+}
+
+.button-container {
+    margin-top: 20px;
+}
+
+.buttons th {
+    text-align: center;
+}
+
+.return-button {
+    background-color: #28a745;
+    color: #fff;
+    padding: 10px 20px;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 5px;
+}
+
+.return-button:hover {
+    background-color: #218838;
+}
+
+#inputForm {
+    margin-top: 20px;
+}
+
+#valForm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.panelGrid {
+    width: 80%;
+    margin: 0 auto;
+}
+
+#x-container,
+#y-container,
+#r-container {
+    margin-bottom: 10px;
+}
+
+.data-button {
+    margin-top: 10px;
+}
+
+.frame {
+    float: left;
+    width: 50%;
+    height: 550px;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.table-block {
+    width: 80%;
+    margin: 0 auto;
+}
+
+.table-caption {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.result-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.result-table th,
+.result-table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+
+}
+
+.result-table th {
+    background-color: #007bff;
+    color: #fff;
+}
+
+#divOffset,
+#data {
+    margin-top: 20px;
+}
+
+#Yerrors,
+#Xerrors {
+    width: 100%;
+    color: red;
+    margin-top: 10px;
+}
+
+/* Optional: Add some spacing and center the content */
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+}

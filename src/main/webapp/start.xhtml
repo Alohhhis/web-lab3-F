@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+<h:head>
+    <title>Стартовая страница</title>
+    <h:outputStylesheet name="styles/start.css"/>
+
+</h:head>
+
+<h:body>
+    <h1>Докшина Алёна </h1>
+    <h2>P3221, Вариант 2187</h2>
+
+    <style>
+        *{
+            text-align: center;
+        }
+    </style>
+    <div id="clock"></div>
+
+
+    <h:button value="На главную" styleClass="forward-button" outcome="go-to-main"/>
+
+</h:body>
+<h:outputScript name="js/clock.js"/>
+</html>
