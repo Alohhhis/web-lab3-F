@@ -7,7 +7,6 @@ const yAxisLabel = "Y";
 let Rvalue;
 let xAxisScale;
 let yAxisScale;
-// ctx.lineWidth = 2;
 const k = 5;
 
 function draw() {
@@ -220,167 +219,6 @@ function drawPoint(x, y, r) {
     ctx.closePath();
 }
 
-// function drawGraph(r){
-//     ctx.fillStyle = "#00b4d8";
-//     //график 1 четверть
-//
-//
-//
-//     //график 2 четверть
-//     ctx.beginPath();
-//     ctx.moveTo(centerX, centerY);
-//     ctx.lineTo(centerX - side/3 * (r/k) , centerY);
-//     ctx.lineTo(centerX - side/3 * (r/k) , centerY - side/3 * (r/k));
-//     ctx.lineTo(centerX,centerY - side/3 * (r/k));
-//     ctx.fill();
-//     ctx.closePath();
-//
-//     //график 3 четверть пустой
-//     ctx.beginPath();
-//     ctx.moveTo(centerX, centerY);
-//     ctx.lineTo(centerX, centerY + side/6 * (r/k));
-//     ctx.lineTo(centerX - side/6 * (r/k), centerY);
-//     ctx.fill();
-//     ctx.closePath();
-//
-//     //график 4 четверть
-//     ctx.beginPath();
-//     const radius = side / 3 * (r/k);
-//     const startAngle = 0;
-//     const endAngle = Math.PI /2;
-//     ctx.beginPath();
-//     ctx.moveTo(centerX, centerY);
-//     ctx.arc(centerX, centerY, radius, startAngle, endAngle, false);
-//     ctx.fill();
-//     ctx.closePath();
-//
-//     //x axis
-//     ctx.fillStyle = "#000000";
-//     ctx.beginPath();
-//     ctx.moveTo(centerX - side/2, centerY);
-//     ctx.lineTo(centerX + side/2, centerY);
-//     ctx.stroke();
-//     ctx.closePath();
-//
-//     //y axis
-//     ctx.beginPath();
-//     ctx.moveTo(centerX, centerY + side/2);
-//     ctx.lineTo(centerX, centerY - side/2);
-//     ctx.stroke();
-//     ctx.closePath();
-//
-//     //x arrow
-//     ctx.beginPath();
-//     ctx.moveTo(centerX + side/2, centerY);
-//     ctx.lineTo(centerX + side/2 - 10, centerY + 10);
-//     ctx.lineTo(centerX + side/2 - 10, centerY - 10);
-//     ctx.lineTo(centerX + side/2, centerY);
-//     ctx.fill();
-//     ctx.closePath();
-//
-//     //y arrow
-//     ctx.beginPath();
-//     ctx.moveTo(centerX, centerY - side/2);
-//     ctx.lineTo(centerX + 10, centerY - side/2 + 10);
-//     ctx.lineTo(centerX - 10, centerY - side/2 + 10);
-//     ctx.lineTo(centerX, centerY - side/2);
-//     ctx.fill();
-//     ctx.closePath();
-//
-//     //пометки на числовой оси
-//
-//     ctx.beginPath();
-//     ctx.moveTo(centerX + side/6 * (r/k), centerY);
-//     ctx.lineTo(centerX + side/6 * (r/k), centerY + 5);
-//     ctx.lineTo(centerX + side/6 * (r/k), centerY - 5);
-//     ctx.stroke();
-//     ctx.closePath();
-//
-//     ctx.beginPath();
-//     ctx.moveTo(centerX - side/6 * (r/k), centerY);
-//     ctx.lineTo(centerX - side/6 * (r/k), centerY + 5);
-//     ctx.lineTo(centerX - side/6 * (r/k), centerY - 5);
-//     ctx.stroke();
-//     ctx.closePath();
-//
-//     ctx.beginPath();
-//     ctx.moveTo(centerX, centerY + side/6 * (r/k));
-//     ctx.lineTo(centerX - 5, centerY + side/6 * (r/k));
-//     ctx.lineTo(centerX + 5, centerY + side/6 * (r/k));
-//     ctx.stroke();
-//     ctx.closePath();
-//
-//     ctx.beginPath();
-//     ctx.moveTo(centerX, centerY - side/6 * (r/k));
-//     ctx.lineTo(centerX - 5, centerY - side/6 * (r/k));
-//     ctx.lineTo(centerX + 5, centerY - side/6 * (r/k));
-//     ctx.stroke();
-//     ctx.closePath();
-//
-//     ctx.beginPath();
-//     ctx.moveTo(centerX + side/3 * (r/k), centerY);
-//     ctx.lineTo(centerX + side/3 * (r/k), centerY + 5);
-//     ctx.lineTo(centerX + side/3 * (r/k), centerY - 5);
-//     ctx.stroke();
-//     ctx.closePath();
-//
-//     ctx.beginPath();
-//     ctx.moveTo(centerX - side/3 * (r/k), centerY);
-//     ctx.lineTo(centerX - side/3 * (r/k), centerY + 5);
-//     ctx.lineTo(centerX - side/3 * (r/k), centerY - 5);
-//     ctx.stroke();
-//     ctx.closePath();
-//
-//     ctx.beginPath();
-//     ctx.moveTo(centerX, centerY + side/3 * (r/k));
-//     ctx.lineTo(centerX - 5, centerY + side/3 * (r/k));
-//     ctx.lineTo(centerX + 5, centerY + side/3 * (r/k));
-//     ctx.stroke();
-//     ctx.closePath();
-//
-//     ctx.beginPath();
-//     ctx.moveTo(centerX, centerY - side/3 * (r/k));
-//     ctx.lineTo(centerX - 5, centerY - side/3 * (r/k));
-//     ctx.lineTo(centerX + 5, centerY - side/3 * (r/k));
-//     ctx.stroke();
-//     ctx.closePath();
-//
-//     ctx.fillStyle = "black";
-//     ctx.font = "bold 10px";
-//
-//     ctx.beginPath();
-//     ctx.fillText("R", centerX - 20, centerY - side/3 * (r/k));
-//     ctx.closePath();
-//
-//     ctx.beginPath();
-//     ctx.fillText("R/2", centerX - 30, centerY - side/6 * (r/k));
-//     ctx.closePath();
-//
-//     ctx.beginPath();
-//     ctx.fillText("-R/2", centerX - 35, centerY + side/6 * (r/k));
-//     ctx.closePath();
-//
-//     ctx.beginPath();
-//     ctx.fillText("-R", centerX - 25, centerY + side/3 * (r/k));
-//     ctx.closePath();
-//
-//     ctx.beginPath();
-//     ctx.fillText("-R/2", centerX - side/6 * (r/k) - 10, centerY - 10);
-//     ctx.closePath();
-//
-//     ctx.beginPath();
-//     ctx.fillText("-R", centerX - side/3 * (r/k) - 5 , centerY - 10);
-//     ctx.closePath();
-//
-//     ctx.beginPath();
-//     ctx.fillText("R/2", centerX + side/6 * (r/k) - 10, centerY - 10);
-//     ctx.closePath();
-//
-//     ctx.beginPath();
-//     ctx.fillText("R", centerX + side/3 * (r/k) - 5 , centerY - 10);
-//     ctx.closePath();
-// }
-
 function drawDots(ctx, r) {
 
     let table = document.getElementById("resultTable");
@@ -394,13 +232,13 @@ function drawDots(ctx, r) {
             let tableWasHit = table.rows[i].cells[3].innerText;
             let color;
             if (tableX !== "" && tableY !== "") {
-                let canvasX = (tableX * side) / (3 * k) + 200;
-                let canvasY = (tableY * side) / (-3 * k) + 200;
+                let scaledPoint = {x: scaleXAxesCoordinate(tableX), y: scaleYAxesCoordinate(tableY)};
+                let pointOnCanvas = axesToCanvasCoordinates(scaledPoint.x, scaledPoint.y, canvas);
                 if (tableWasHit === "true") {
                     color = "red";
                 } else color = "white";
                 ctx.beginPath();
-                ctx.arc(canvasX, canvasY, 4, 0, Math.PI * 2);
+                ctx.arc(pointOnCanvas.x, pointOnCanvas.y, 4, 0, Math.PI * 2);
                 ctx.fillStyle = color;
                 ctx.fill();
                 ctx.stroke();

@@ -13,8 +13,6 @@
 <h:body onload="draw();">
     <h1>Основная страница</h1>
 
-
-
     <div class="button-container">
         <h:button value="Назад" styleClass="return-button" outcome="go-to-start" id="go_to_start_button"/>
     </div>
@@ -36,9 +34,10 @@
 
 
                 <div id="y-container">
-                    <h:outputLabel for="y" value="Выберите Y:">
+                    <h:outputLabel for="y" value="Выберите Y [-5;3]:">
                         <h:inputText id="y" required="true" value="#{yBean.value}" maxlength="5"
-                                     styleClass="y-input" validator="#{yBean.validateY}">
+                                     styleClass="y-input" validator="#{yBean.validateY}"
+                                     converter="customDoubleConverter">
                             <f:ajax execute="y" render=":msgPanel"/>
                             <f:validateDoubleRange minimum="-5" maximum="3"/>
                             <p:watermark for="y" value="Введите значение [-5;3]"/>
@@ -60,56 +59,6 @@
                         <tr>
                             <td colspan="3">
                                 <canvas id="canvas" width="400" height="400"/>
-<!--                                <script type='text/javascript'>-->
-<!--                                    canvas.addEventListener("click", function (event){-->
-<!--                                        let x = event.offsetX;-->
-<!--                                        let y = event.offsetY;-->
-<!--                                        let r = document.getElementById("mainForm:beanRadius").value;-->
-<!--                                        let offset = document.getElementById("date").value;-->
-<!--                                        let rect = canvas.getBoundingClientRect();-->
-<!--                                        let clientX = (event.clientX - rect.left - 200) / (side / 3) * k;-->
-<!--                                        let clientY = ((-1) * (event.clientY - rect.top - 200)) / (side / 3) * k;-->
-<!--                                        colorizeDot(ctx, clientX, clientY, r);-->
-<!--                                        ctx.beginPath();-->
-<!--                                        ctx.arc(x,y,4,0,Math.PI*2);-->
-<!--                                        ctx.fill();-->
-<!--                                        ctx.stroke();-->
-<!--                                        ctx.closePath();-->
-
-<!--                                        console.log("Coordinate x: " + clientX + " ",-->
-<!--                                            "Coordinate y: "+ clientY + " r value = " + r);-->
-<!--                                        check(clientX, clientY);-->
-
-<!--                                        function colorizeDot(ctx,x, y, r){-->
-<!--                                            if (x >= 0 &amp;&amp; y >= 0){-->
-<!--                                                if (y &lt;= (-x + r/2)){-->
-<!--                                                    ctx.fillStyle="red";-->
-<!--                                                }-->
-<!--                                                else ctx.fillStyle="white";-->
-<!--                                            }-->
-<!--                                            else if (x > 0 &amp;&amp; y &lt; 0){-->
-<!--                                                if (Math.pow(x,2) + Math.pow(y,2) &lt;= Math.pow(r,2)){-->
-<!--                                                    ctx.fillStyle="red";-->
-<!--                                                }else ctx.fillStyle="white";-->
-<!--                                            }-->
-<!--                                            else if (x &lt; 0 &amp;&amp; y > 0){-->
-<!--                                                if ((y &lt;= (r / 2)) &amp;&amp; (x >= -r)){-->
-<!--                                                    ctx.fillStyle="red";-->
-<!--                                                }else ctx.fillStyle="white";-->
-<!--                                            }-->
-<!--                                            else ctx.fillStyle="white";-->
-<!--                                        }-->
-
-<!--                                        function check(clientX, clientY){-->
-<!--                                            document.getElementById("graphForm:hiddenX").value = clientX.toFixed(4);-->
-<!--                                            document.getElementById("graphForm:hiddenY").value = clientY.toFixed(4);-->
-<!--                                            document.getElementById("graphForm:hiddenR").value = document.getElementById("mainForm:beanRadius").value;-->
-<!--                                            document.getElementById("graphForm:hiddenOffset").value = offset;-->
-<!--                                            let btn = document.getElementById("graphForm:hidden-btn");-->
-<!--                                            btn.click();-->
-<!--                                        }-->
-<!--                                    })-->
-<!--                                </script>-->
                             </td>
                         </tr>
                     </table>
@@ -127,15 +76,6 @@
         </h:form>
     </div>
 
-<!--    <h:form id="graphForm">-->
-<!--        <h:inputHidden id="hiddenX" value="#{xBean.value}"/>-->
-<!--        <h:inputHidden id="hiddenY" value="#{yBean.value}"/>-->
-<!--        <h:inputHidden id="hiddenR" value="#{rBean.value}"/>-->
-
-<!--        <h:commandButton style="display: none;" id="hidden-btn" action="#{result.addRow(xBean.value, yBean.value, rBean.value)}">-->
-<!--            <f:ajax execute="@form" render="resultTable"/>-->
-<!--        </h:commandButton>-->
-<!--    </h:form>-->
     <p:remoteCommand name="clickSender" action="#{result.addRowCanvas}" update=":resultTable"/>
     <div id="data" class="frame"
          style="float:left; width: 100%; height: 550px;align-content: center; justify-content: center">

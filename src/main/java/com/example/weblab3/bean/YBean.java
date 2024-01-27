@@ -13,7 +13,6 @@ import java.io.Serializable;
 @ApplicationScoped
 public class YBean implements Serializable {
     private String value = "0";
-
     public String getValue() {
         return value;
     }
