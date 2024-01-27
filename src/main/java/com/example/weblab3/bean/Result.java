@@ -1,12 +1,12 @@
 package com.example.weblab3.bean;
 
 import com.example.weblab3.DB.DataBase;
-import com.example.weblab3.DB.PaginationHelper;
 import jakarta.ejb.EJB;
 import jakarta.faces.bean.ApplicationScoped;
 import jakarta.faces.model.DataModel;
-import jakarta.faces.model.ListDataModel;
 import jakarta.inject.Named;
+import org.primefaces.event.data.PageEvent;
+import org.primefaces.model.LazyDataModel;
 
 import java.io.Serializable;
 import java.util.List;
@@ -18,12 +18,11 @@ public class Result implements Serializable {
     private XBean xBean;
     private YBean yBean;
     private RBean rBean;
-    private PaginationHelper pagination;
     private int selectedItemIndex;
     private DataModel dtmdl = null;
+
     @EJB
     private DataBaseEJB dataBaseEJB;
-
 
     public void addRow(String x, String y, String r) {
         dataBaseEJB.add(x, y, r);
@@ -44,4 +43,5 @@ public class Result implements Serializable {
     public void sendAllPoints() {
         dataBaseEJB.sendAllJson();
     }
+
 }

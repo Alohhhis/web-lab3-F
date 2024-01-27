@@ -90,7 +90,7 @@ public class DataBaseEJB {
     }
 
     public List<DataBase> getAllPoints() {
-        Query query = entityManager.createQuery("select point from DataBase point");
+        Query query = entityManager.createQuery("SELECT point FROM DataBase point");
         return query.getResultList();
     }
     public void deleteAll() {
@@ -101,6 +101,8 @@ public class DataBaseEJB {
         ObjectMapper objectMapper = new ObjectMapper();
         String json = "[]";
         try {
+            int pageNumber =1;
+            int paggeSize =10;
             json = objectMapper.writeValueAsString(getAllPoints());
             System.out.println(json);
             PrimeFaces.current().ajax().addCallbackParam("response", json);
