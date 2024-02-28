@@ -17,18 +17,18 @@ public class CustomDoubleConverter implements Converter {
         }
 
         try {
-            return Double.parseDouble(value.replace(",", ".")); // заменяем запятую на точку
+            return Double.parseDouble(value.replace(",", "."));
         } catch (NumberFormatException e) {
-            throw new ConverterException(new FacesMessage(FacesMessage.SEVERITY_ERROR, "Ошибка", "Введите числовое значение."));
+            throw new ConverterException(new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "Please, enter a number."));
         }
     }
-
+//TODO чзх?
     @Override
     public String getAsString(FacesContext context, UIComponent component, Object value) {
         if (value == null) {
             return "";
         }
 
-        return value.toString().replace(".", ","); // заменяем точку на запятую
+        return value.toString().replace(".", ",");
     }
 }

@@ -185,7 +185,7 @@ function handleCanvasClick(event) {
         ])
         console.log("send");
     } catch (e) {
-        console.log("wtf");
+        console.log("error");
     }
 
 }

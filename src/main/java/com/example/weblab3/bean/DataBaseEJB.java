@@ -12,13 +12,16 @@ import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.Query;
 import org.primefaces.PrimeFaces;
 
+import java.io.Serializable;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Map;
 
 @Stateless
-public class DataBaseEJB {
+public class DataBaseEJB implements Serializable {
+    @PersistenceContext(unitName = "ExamplePU")
+    private EntityManager entityManager;
     private final int MIN_X = -3;
     private final int MAX_X = 3;
     private final int MIN_Y = -5;
@@ -38,8 +41,6 @@ public class DataBaseEJB {
     private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
 
 
-    @PersistenceContext(unitName = "examplePU")
-    private EntityManager entityManager;
 
     public void add(String xStr, String yStr, String rStr) {
         try {
@@ -81,7 +82,9 @@ public class DataBaseEJB {
                 dataBase.setResult(result);
                 dataBase.setTime(curTime);
                 dataBase.setScriptTime(scriptTime);
+                System.out.println("Before saving to DB");
                 entityManager.persist(dataBase);
+                System.out.println("After saving in DB");
 
             }
         } catch (NumberFormatException e) {
@@ -101,8 +104,6 @@ public class DataBaseEJB {
         ObjectMapper objectMapper = new ObjectMapper();
         String json = "[]";
         try {
-            int pageNumber =1;
-            int paggeSize =10;
             json = objectMapper.writeValueAsString(getAllPoints());
             System.out.println(json);
             PrimeFaces.current().ajax().addCallbackParam("response", json);
@@ -114,5 +115,3 @@ public class DataBaseEJB {
     }
 
 }
-
-

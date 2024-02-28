@@ -13,7 +13,7 @@ public class DataBase implements Serializable {
     @Id
     @GeneratedValue
     private Long id;
-    
+
     @Column(nullable = false)
     private float x;
     @Column(nullable = false)
